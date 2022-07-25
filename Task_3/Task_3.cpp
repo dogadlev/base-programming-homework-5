@@ -11,7 +11,8 @@ protected:
     std::string name;
     virtual bool check()
     {
-        return sidesCount == 0 ? true : false;
+        if (sidesCount == 0) { return true; }
+        else { return false; }
     }
     
 public:
@@ -20,7 +21,6 @@ public:
         this->name = name;
         this->sidesCount = sidesCount;
     }
-    Figure() {}
     int getSidesCount()
     {
         return sidesCount;
@@ -29,14 +29,6 @@ public:
     {
         return name;
     }
-    virtual int getSideA() { return 0; }
-    virtual int getSideB() { return 0; }
-    virtual int getSideC() { return 0; }
-    virtual int getSideD() { return 0; }
-    virtual int getAngleA() { return 0; }
-    virtual int getAngleB() { return 0; }
-    virtual int getAngleC() { return 0; }
-    virtual int getAngleD() { return 0; }
     virtual void print_info() 
     {
         std::cout << name << ":" << std::endl;
@@ -56,7 +48,7 @@ protected:
     int angleC = 0;
     bool check() override
     {
-        if (sidesCount == 3 && (angleA + angleB + angleC) == 180) { return true; }
+        if (sidesCount == 3 && ((angleA + angleB + angleC) == 180)) { return true; }
         else { return false; }
     }
 
@@ -71,19 +63,13 @@ public:
         this->angleB = angleB;
         this->angleC = angleC;
     }
-    int getSideA() override { return sideA; }
-    int getSideB() override { return sideB; }
-    int getSideC() override { return sideC; }
-    int getAngleA() override { return angleA; }
-    int getAngleB() override { return angleB; }
-    int getAngleC() override { return angleC; }
     void print_info() override
     {
         std::cout << name << ":" << std::endl;
         std::cout << (check() ? "Правильная" : "Неправильная") << std::endl;
         std::cout << "Количество сторон: " << sidesCount << std::endl;
-        std::cout << "Стороны: a=" << getSideA() << " b=" << getSideB() << " c=" << getSideC() << std::endl;
-        std::cout << "Углы: A=" << getAngleA() << " B=" << getAngleB() << " C=" << getAngleC() << "\n\n";
+        std::cout << "Стороны: a=" << sideA << " b=" << sideB << " c=" << sideC << std::endl;
+        std::cout << "Углы: A=" << angleA << " B=" << angleB << " C=" << angleC << "\n\n";
     }
 };
 
@@ -148,7 +134,7 @@ protected:
     int angleD = 0;
     bool check() override
     {
-        if (sidesCount == 4 && (angleA + angleB + angleC + angleD) == 360) { return true; }
+        if (sidesCount == 4 && ((angleA + angleB + angleC + angleD) == 360)) { return true; }
         else { return false; }
     }
 
@@ -165,21 +151,13 @@ public:
         this->angleC = angleC;
         this->angleD = angleD;
     }
-    int getSideA() override { return sideA; }
-    int getSideB() override { return sideB; }
-    int getSideC() override { return sideC; }
-    int getSideD() override { return sideD; }
-    int getAngleA() override { return angleA; }
-    int getAngleB() override { return angleB; }
-    int getAngleC() override { return angleC; }
-    int getAngleD() override { return angleD; }
     void print_info() override
     {
         std::cout << name << ":" << std::endl;
         std::cout << (check() ? "Правильная" : "Неправильная") << std::endl;
         std::cout << "Количество сторон: " << sidesCount << std::endl;
-        std::cout << "Стороны: a=" << getSideA() << " b=" << getSideB() << " c=" << getSideC() << " d=" << getSideD() << std::endl;
-        std::cout << "Углы: A=" << getAngleA() << " B=" << getAngleB() << " C=" << getAngleC() << " D=" << getAngleD() << "\n\n";
+        std::cout << "Стороны: a=" << sideA << " b=" << sideB << " c=" << sideC << " d=" << sideD << std::endl;
+        std::cout << "Углы: A=" << angleA << " B=" << angleB << " C=" << angleC << " D=" << angleD << "\n\n";
     }
 };
 
@@ -258,7 +236,7 @@ int main(int argc, char** argv)
     Triangle triangle(10, 20, 30, 50, 60, 70);
     triangle.print_info();
 
-    RightTriangle rightTriangle(10, 20, 30, 50, 40);
+    RightTriangle rightTriangle(10, 20, 30, 50, 60);
     rightTriangle.print_info();
     
     IsoscelesTriangle isoscelesTriangle(10, 20, 50, 60);

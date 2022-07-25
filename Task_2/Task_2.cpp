@@ -16,7 +16,6 @@ public:
         this->name = name;
         this->sidesCount = sidesCount;
     }
-    Figure() {}
     int getSidesCount()
     {
         return sidesCount;
@@ -25,14 +24,10 @@ public:
     {
         return name;
     }
-    virtual int getSideA() { return 0; }
-    virtual int getSideB() { return 0; }
-    virtual int getSideC() { return 0; }
-    virtual int getSideD() { return 0; }
-    virtual int getAngleA() { return 0; }
-    virtual int getAngleB() { return 0; }
-    virtual int getAngleC() { return 0; }
-    virtual int getAngleD() { return 0; }
+    virtual void print() 
+    {
+        std::cout << "Количество сторон: " << getSidesCount();
+    }
 };
 
 class Triangle : public Figure
@@ -55,13 +50,13 @@ public:
         this->angleA = angleA;
         this->angleB = angleB;
         this->angleC = angleC;
+    }  
+    void print() override 
+    {
+        std::cout << name << ":" << std::endl;
+        std::cout << "Стороны: a=" << sideA << " b=" << sideB << " c=" << sideC << std::endl;
+        std::cout << "Углы: A=" << angleA << " B=" << angleB << " C=" << angleC << "\n\n";
     }
-    int getSideA() override { return sideA; }
-    int getSideB() override { return sideB; }
-    int getSideC() override { return sideC; }
-    int getAngleA() override { return angleA; }
-    int getAngleB() override { return angleB; }
-    int getAngleC() override { return angleC; }
 };
 
 class RightTriangle : public Triangle
@@ -116,14 +111,12 @@ public:
         this->angleC = angleC;
         this->angleD = angleD;
     }
-    int getSideA() override { return sideA; }
-    int getSideB() override { return sideB; }
-    int getSideC() override { return sideC; }
-    int getSideD() override { return sideD; }
-    int getAngleA() override  { return angleA; }
-    int getAngleB() override { return angleB; }
-    int getAngleC() override { return angleC; }
-    int getAngleD() override { return angleD; }
+    void print() override
+    {
+        std::cout << name << ":" << std::endl;
+        std::cout << "Стороны: a=" << sideA << " b=" << sideB << " c=" << sideC << " d=" << sideD << std::endl;
+        std::cout << "Углы: A=" << angleA << " B=" << angleB << " C=" << angleC << " D=" << angleD << "\n\n";
+    }
 };
 
 class Parallelogram : public Quadrangle 
@@ -164,22 +157,7 @@ public:
 
 void print_info(Figure* fig)
 {
-    if (fig->getSidesCount() == 3)
-    {
-        std::cout << fig->getName() << ":" << std::endl;
-        std::cout << "Стороны: a=" << fig->getSideA() << " b=" << fig->getSideB() << " c=" << fig->getSideC() << std::endl;
-        std::cout << "Углы: A=" << fig->getAngleA() << " B=" << fig->getAngleB() << " C=" << fig->getAngleC() << "\n\n";
-    }
-    else if (fig->getSidesCount() == 4)
-    {
-        std::cout << fig->getName() << ":" << std::endl;
-        std::cout << "Стороны: a=" << fig->getSideA() << " b=" << fig->getSideB() << " c=" << fig->getSideC() << " d=" << fig->getSideD() << std::endl;
-        std::cout << "Углы: A=" << fig->getAngleA() << " B=" << fig->getAngleB() << " C=" << fig->getAngleC() << " D=" << fig->getAngleD() << "\n\n";
-    }
-    else if (fig->getSidesCount() == 0)
-    {
-        std::cout << "Базовая фигура. Стороны и углы не определены.";
-    }
+    fig->print();
 }
 
 
